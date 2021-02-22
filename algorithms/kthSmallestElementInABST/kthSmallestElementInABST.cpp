@@ -18,7 +18,11 @@ The number of nodes in the tree is n.
 1 <= k <= n <= 10^4
 0 <= Node.val <= 10^4
 
-Follow up : If the BST is modified often(i.e., we can do insertand delete operations) and you need to find the kth smallest frequently, how would you optimize ?
+Follow up : If the BST is modified often(i.e., we can do insert and delete operations) and you need to find the kth smallest frequently, how would you optimize ?
+
+I would add a node count attribute to the TreeNode class, 
+find kth smallest would cost from O(n) -> O(h) [height of the tree]
+
 **/
 #include <vector>
 #include <iostream>
@@ -28,16 +32,16 @@ using namespace std;
 //  Definition for a binary tree node.
 struct TreeNode {
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode* left;
+    TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
 class Solution {
     // return # nodes in the tree 'root'
-    int countAndFind(TreeNode* root, int k, TreeNode* &tar) {
+    int countAndFind(TreeNode* root, int k, TreeNode*& tar) {
         if (!root) return 0;
         int numLeft = countAndFind(root->left, k, tar);
         if (numLeft == k - 1) {
@@ -73,7 +77,7 @@ void main() {
             vecNodes[i] = nullptr;
         if (i > 0 && i % 2 == 1)
             vecNodes[(i - 1) / 2]->left = vecNodes[i];
-        else if (i>0 && i%2 == 0)
+        else if (i > 0 && i % 2 == 0)
             vecNodes[(i - 2) / 2]->right = vecNodes[i];
     }
 
