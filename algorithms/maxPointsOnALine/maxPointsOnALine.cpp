@@ -87,11 +87,13 @@ class Solution {
 public:
     /**
         this can be solved by hough transform
-        every pair of points can be described as: (0, y) + (a, b)*t
+        every pair of points can be described as: (0, y) + (a, b)*t  (yInterception and slope)
 
-        the idea is to group every pair of point by (y, a, b)
+        the idea is to group every pair of point by 
         y, a, b should be simplest 
 
+        Note: after reading the discussion, I realized if we put the voting map inside the forloop of start point, 
+        then we dont need to compute the yInterception, makes it much cleaner
     */
     int maxPoints(vector<vector<int>>& A) {
         if (A.size() <= 2) return A.size();
